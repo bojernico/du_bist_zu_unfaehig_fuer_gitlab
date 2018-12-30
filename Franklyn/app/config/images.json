@@ -1,0 +1,13 @@
+{
+  "default": "../images/grey",
+  "content": [
+    {
+      "id": "home",
+      "file": "../images/racoon"
+    },
+    {
+      "id": "assistant",
+      "file": "../images/cat"
+    }
+  ]
+}

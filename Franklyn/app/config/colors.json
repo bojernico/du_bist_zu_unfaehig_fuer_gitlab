@@ -1,0 +1,13 @@
+{
+  "default": "grey",
+  "content": [
+    {
+      "id": "home",
+      "color": "blue"
+    },
+    {
+      "id": "assistant",
+      "color": "red"
+    }
+  ]
+}
