@@ -13,6 +13,7 @@
 import { app, BrowserWindow } from 'electron';
 import MenuBuilder from './menu';
 const path = require('path');
+app.commandLine.appendSwitch('disable-pinch');
 
 let mainWindow = null;
 

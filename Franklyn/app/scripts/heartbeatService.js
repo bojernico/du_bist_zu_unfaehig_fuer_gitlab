@@ -8,9 +8,7 @@ async function startSendingHeartbeats() {
   do {
     res = await sendHeartbeat();
     var config = JSON.parse(sessionStorage.getItem('config'));
-    console.log(res);
     if (res.state) sessionStorage.setItem('exam', res.response);
-    console.log(config.heartbeatInterval * 1000);
     await sleep(config.heartbeatInterval * 1000);
   } while (true)
 }

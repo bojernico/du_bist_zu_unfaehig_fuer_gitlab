@@ -23,8 +23,16 @@ h1 {
   text-align: center;
 }
 .vertical-center {
-  min-height: 100%; /* Fallback for browsers do NOT support vh unit */
-  min-height: 100vh; /* These two lines are counted as one :-)       */
+  min-height: 100%;
+  min-height: 100vh;
   display: flex;
   align-items: center;
+}
+.title {
+  text-align: center;
+  color: #2a4d69;
+  font-size: 20px;
+  margin-top: 105px;
+  margin-left: 122px;
+  position: fixed;
 }

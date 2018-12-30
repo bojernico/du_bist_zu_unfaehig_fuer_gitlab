@@ -8,3 +8,11 @@ input[type='number']::-webkit-outer-spin-button {
   appearance: none;
   margin: 0;
 }
+.title {
+  text-align: center;
+  color: #2a4d69;
+  font-size: 20px;
+  margin-top: 155px;
+  margin-left: 305px;
+  position: fixed;
+}

@@ -48,7 +48,7 @@ class Pin extends Component {
         <React.Fragment>
           <div className="vertical-center">
             <div className="container">
-              <form>
+              <form onSubmit={e => { e.preventDefault(); }}>
                 <div className="form-group">
                   <label>
                     <input
@@ -63,8 +63,12 @@ class Pin extends Component {
                   </label>
                 </div>
               </form>
+              <div>
+                <h1 className={styles.title}>Franklyn</h1>
+              </div>
             </div>
           </div>
+
         </React.Fragment>
       );
     }

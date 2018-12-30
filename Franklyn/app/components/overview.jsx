@@ -48,6 +48,7 @@ class Overview extends Component {
                 value={this.state.buttonText}
                 onClick={this.handleClick}
               />
+              <h1 className={styles.title}>Franklyn</h1>
             </div>
           </main>
         </div>
@@ -66,6 +67,7 @@ class Overview extends Component {
             <main role="main" className="m-4">
               <h3 className={styles.darkFont}>Viel Erfolg!</h3>
             </main>
+            <h1 className={styles.title}>Franklyn</h1>
           </div>
         );
       } else {
@@ -76,6 +78,7 @@ class Overview extends Component {
               <h5 className={styles.darkFont}>Verbleibende Zeit:</h5>
               <CountDown date={examEndTime} className={styles.darkFont} />
             </main>
+            <h1 className={styles.title}>Franklyn</h1>
           </div>
         );
       }

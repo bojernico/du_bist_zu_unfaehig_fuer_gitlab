@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Overview from './overview';
 const { registerExaminee, enroll } = require('../scripts/setup');
+import styles from './css/verification.css';
 
 class Verification extends Component {
   state = {
@@ -18,7 +19,7 @@ class Verification extends Component {
   }
 
   handleChange(key) {
-    return function(e) {
+    return function (e) {
       var state = {};
       state[key] = e.target.value;
       this.setState(state);
@@ -32,27 +33,27 @@ class Verification extends Component {
       this.validateLastname() === 'form-control is-valid'
     ) {
       registerExaminee(this.state.enrolmentNumber, this.state.firstname, this.state.lastname).then((res) => {
-        if(res.state) {
+        if (res.state) {
           enroll().then((res) => {
-            if(res.state) {
+            if (res.state) {
               this.setState({ correct: true });
               this.renderFuction();
             }
           });
         }
       });
-      
+
     }
     this.setState({ next: true });
     event.preventDefault();
   }
 
   validateFirstname() {
-    return this.validate(this.state.firstname, new RegExp('^[a-zA-Zäüöß]+$'));
+    return this.validate(this.state.firstname, new RegExp('^[A-Z][a-zäüöß]+$'));
   }
 
   validateLastname() {
-    return this.validate(this.state.lastname, new RegExp('^[a-zA-Zäüöß]+$'));
+    return this.validate(this.state.lastname, new RegExp('^[A-Z][a-zäüöß]+$'));
   }
 
   validateEnrolmentNumber() {
@@ -105,7 +106,7 @@ class Verification extends Component {
                     id="inputLastname"
                     value={this.state.firstname}
                     onChange={this.handleChange('firstname')}
-                    />
+                  />
                 </label>
               </div>
               <div className="form-group">
@@ -127,6 +128,7 @@ class Verification extends Component {
                 />
               </div>
             </form>
+            <h1 className={styles.title}>Franklyn</h1>
           </div>
         </div>
       );
