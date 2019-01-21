@@ -1,0 +1,25 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input {
+  text-align: center;
+}
+
+.center {
+  margin-top: 180px;
+}
+
+.title {
+  text-align: center;
+  font-weight: normal;
+  color: #00090C;
+  font-size: 20px;
+  margin-top: 162px;
+}
+
+.serverAddress {
+  width: 300px;
+}
