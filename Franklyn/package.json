@@ -2,7 +2,7 @@
   "name": "franklyn",
   "version": "0.1.0",
   "description": "Franklyn is an exam support system.",
-  "homepage": "./",
+  "homepage": "http://franklyn.htl-leonding.ac.at/",
   "private": true,
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
