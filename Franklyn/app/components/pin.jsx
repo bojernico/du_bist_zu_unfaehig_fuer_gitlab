@@ -25,7 +25,7 @@ class Pin extends Component {
   }
 
   validatePin(event) {
-    if (event.target.value.length == 6) {
+    if (event.target.value.length == JSON.parse(sessionStorage.getItem('config')).pinLength) {
       getExamToken(event.target.value, new Date()).then(res => {
         if (res.state) {
           this.setState({ next: true }, () => {

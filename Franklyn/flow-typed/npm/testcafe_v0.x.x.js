@@ -1,5 +1,5 @@
-// flow-typed signature: a6d5356578211472776975e31449d9df
-// flow-typed version: 2dd8d5bc75/testcafe_v0.x.x/flow_>=v0.63.x
+// flow-typed signature: 47a32e7bccec89c55d746b93b3a95417
+// flow-typed version: 2ba87494a7/testcafe_v0.x.x/flow_>=v0.63.x
 
 /**
  * Flowtype definitions for TestCafe
@@ -298,7 +298,7 @@ declare interface TestCafe$RequestLoggerOptions {
 interface TestCafe$RequestMock {
     onRequestTo(filter: string | RegExp | Object | (req: TestCafe$RequestData, res: TestCafe$ResponseData) => boolean): TestCafe$RequestMock;
 
-    respond(body?: null | Object | string | (req: TestCafe$RequestData, res: TestCafe$ResponseData) => any, statusCode?: number, headers?: Object): TestCafe$RequestMock;
+    respond(body?: Object | string | (req: TestCafe$RequestData, res: TestCafe$ResponseData) => any, statusCode?: number, headers?: Object): TestCafe$RequestMock;
 }
 
 interface TestCafe$Request {
@@ -684,12 +684,12 @@ declare module 'testcafe' {
         (hostname: string, port1: number, port2: number): Promise<TestCafe>,
 
         Selector(init: TestCafe$SelectorParameter, options?: TestCafe$SelectorOptions): TestCafe$SelectorFn,
-        ClientFunction(fn: (...args: any) => any, options?: TestCafe$ClientFunctionOptions): TestCafe$ClientFunctionFn,
+        ClientFunction(fn: Function, options?: TestCafe$ClientFunctionOptions): TestCafe$ClientFunctionFn,
 
         Role: TestCafe$RoleFn,
         
-        RequestMock: typeof TestCafe$RequestMockFn,
-        RequestLogger: typeof TestCafe$RequestLoggerFn,
+        RequestMock: TestCafe$RequestMockFn,
+        RequestLogger: TestCafe$RequestLoggerFn,
         RequestHook: Class<TestCafe$RequestHookClass>,
         
         t: TestCafe$TestController

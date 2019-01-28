@@ -1,5 +1,5 @@
-// flow-typed signature: 7119d59043d5c09f44983fb7c827d1ba
-// flow-typed version: 44ad941b7a/jquery_v3.x.x/flow_>=v0.28.x
+// flow-typed signature: d71d314ca25fc6c20610a3ba80af9df0
+// flow-typed version: 9698a46399/jquery_v3.x.x/flow_>=v0.28.x
 
 /* eslint-disable max-len, no-unused-vars, flowtype/no-weak-types */
 
@@ -364,13 +364,6 @@ declare class JQueryGenericPromise<T> {
     failFilter?: (...reasons: any[]) => any,
     progressFilter?: (...progression: any[]) => any
   ): JQueryPromise<void>;
-
-  /**
-   * Add handlers to be called when the Deferred object is rejected.
-   *
-   * @param  failFilter An function that is called when the Deferred is rejected.
-   */
-  catch(failFilter: (...reasons: any[]) => any): JQueryPromise<T>;
 }
 
 /**
@@ -829,7 +822,7 @@ declare class JQueryStatic {
    */
   get(
     url: string,
-    data?: {} | string,
+    data?: Object | string,
     success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any,
     dataType?: string
   ): JQueryXHR;
@@ -852,7 +845,7 @@ declare class JQueryStatic {
    */
   getJSON(
     url: string,
-    data?: {} | string,
+    data?: Object | string,
     success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any
   ): JQueryXHR;
   /**
@@ -893,7 +886,7 @@ declare class JQueryStatic {
    */
   post(
     url: string,
-    data?: {} | string,
+    data?: Object | string,
     success?: (data: any, textStatus: string, jqXHR: JQueryXHR) => any,
     dataType?: string
   ): JQueryXHR;
@@ -974,7 +967,7 @@ declare class JQueryStatic {
    * @param html A string defining a single, standalone, HTML element (e.g. <div/> or <div></div>).
    * @param attributes An object of attributes, events, and methods to call on the newly-created element.
    */
-  (html: string, attributes: {}): JQuery;
+  (html: string, attributes: Object): JQuery;
 
   /**
    * Relinquish jQuery's control of the $ variable.
@@ -1432,7 +1425,7 @@ declare class JQuery {
    */
   load(
     url: string,
-    data?: string | {},
+    data?: string | Object,
     complete?: (
       responseText: string,
       textStatus: string,
@@ -1489,7 +1482,7 @@ declare class JQuery {
    *
    * @param attributes An object of attribute-value pairs to set.
    */
-  attr(attributes: {}): JQuery;
+  attr(attributes: Object): JQuery;
   /**
    * Get the value of an attribute for the first element in the set of matched elements.
    *
@@ -1539,7 +1532,7 @@ declare class JQuery {
    *
    * @param properties An object of property-value pairs to set.
    */
-  prop(properties: {}): JQuery;
+  prop(properties: Object): JQuery;
   /**
    * Set one or more properties for the set of matched elements.
    *
@@ -1605,7 +1598,7 @@ declare class JQuery {
   /**
    * Get the current value of the first element in the set of matched elements.
    */
-  val(_: void): string | string[] | number;
+  val(_: void): any;
   /**
    * Set the value of each element in the set of matched elements.
    *
@@ -1641,7 +1634,7 @@ declare class JQuery {
    *
    * @param properties An object of property-value pairs to set.
    */
-  css(properties: {}): JQuery;
+  css(properties: Object): JQuery;
   /**
    * Get the value of style properties for the first element in the set of matched elements.
    *
@@ -1854,7 +1847,7 @@ declare class JQuery {
    * @param complete A function to call once the animation is complete.
    */
   animate(
-    properties: {},
+    properties: Object,
     duration?: string | number,
     complete?: Function
   ): JQuery;
@@ -1867,7 +1860,7 @@ declare class JQuery {
    * @param complete A function to call once the animation is complete.
    */
   animate(
-    properties: {},
+    properties: Object,
     duration?: string | number,
     easing?: string,
     complete?: Function
@@ -1878,7 +1871,7 @@ declare class JQuery {
    * @param properties An object of CSS properties and values that the animation will move toward.
    * @param options A map of additional options to pass to the method.
    */
-  animate(properties: {}, options: JQueryAnimationOptions): JQuery;
+  animate(properties: Object, options: JQueryAnimationOptions): JQuery;
 
   /**
    * Set a timer to delay execution of subsequent items in the queue.
@@ -2927,14 +2920,14 @@ declare class JQuery {
    * @param eventType A string containing a JavaScript event type, such as click or submit.
    * @param extraParameters Additional parameters to pass along to the event handler.
    */
-  trigger(eventType: string, extraParameters?: any[] | {}): JQuery;
+  trigger(eventType: string, extraParameters?: any[] | Object): JQuery;
   /**
    * Execute all handlers and behaviors attached to the matched elements for the given event type.
    *
    * @param event A jQuery.Event object.
    * @param extraParameters Additional parameters to pass along to the event handler.
    */
-  trigger(event: JQueryEventObject, extraParameters?: any[] | {}): JQuery;
+  trigger(event: JQueryEventObject, extraParameters?: any[] | Object): JQuery;
 
   /**
    * Execute all handlers attached to an element for an event.
