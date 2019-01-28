@@ -23,6 +23,7 @@ async function testConnection(url) {
         if (res.isOnline == true) {
           sessionStorage.setItem('config', JSON.stringify(res));
           sessionStorage.setItem('serverUrl', urlWithPort);
+
           resolve({
             state: true
           });
