@@ -78,7 +78,6 @@ app.on('ready', async () => {
     icon: path.join(__dirname, seticons)
   });
 
-  mainWindow.setAutoHideMenuBar(true);
   mainWindow.loadURL(`file://${__dirname}/app.html`);
 
   // @TODO: Use 'ready-to-show' event

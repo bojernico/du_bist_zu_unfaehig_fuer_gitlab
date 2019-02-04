@@ -18,7 +18,8 @@ async function testConnection(url) {
       const port = config.ports[i];
       urlWithPort = 'http://' + url + ':' + port;
       try {
-        var res = JSON.parse(await httpService.get(urlWithPort + '/api'));
+        var res = await httpService.get(urlWithPort + '/api');
+        res = JSON.parse(res);
         if (res.isOnline == true) {
           sessionStorage.setItem('config', JSON.stringify(res));
           sessionStorage.setItem('serverUrl', urlWithPort);

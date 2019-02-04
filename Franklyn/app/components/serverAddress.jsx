@@ -22,6 +22,7 @@ class serverAddress extends Component {
   }
 
   componentDidMount() {
+    /*
     testConnection(
       'franklyn.htl-leonding.ac.at'
     ).then(res => {
@@ -31,6 +32,7 @@ class serverAddress extends Component {
         this.setState({ next: true });
       }
     });
+    */
   }
 
   handleSubmit(event) {
