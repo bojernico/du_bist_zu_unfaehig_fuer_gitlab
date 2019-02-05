@@ -1,4 +1,5 @@
 const request = require('request');
+const axios = require('axios');
 
 /**
  * Sends http get request 
@@ -39,24 +40,15 @@ function get(url, params, headers) {
  * @param {JSON} body
  * @returns {Promise}
  */
-function post(url, headers, body) {
+function post(url, headers, data) {
   return new Promise((resolve, reject) => {
-    var options = {
-      method: 'POST',
-      url: url,
-      headers: headers,
-      body: JSON.stringify(body),
-    };
-    request(options, (error, response, body) => {
-      if (!error && response.statusCode == 200) resolve(body);
-      else if (error) reject(error);
-      else {
-        reject({
-          statusCode: response.statusCode,
-          response: body
-        });
-      }
-    });
+      axios.post(url, data, { headers: headers })
+      .then(function (res) {
+        resolve(res.request.response);
+      })
+      .catch(function (error) {
+        reject(error);
+      });
   });
 }
 

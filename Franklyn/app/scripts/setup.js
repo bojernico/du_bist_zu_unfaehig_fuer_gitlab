@@ -1,7 +1,5 @@
 const httpService = require('./httpService');
-const {
-  getDefaultConfig
-} = require('./utils/valueReader');
+const config = require('../config/config');
 
 /**
  * Check if ip and port are correct and server is online
@@ -12,23 +10,17 @@ const {
  */
 async function testConnection(url) {
   return new Promise(async (resolve, reject) => {
-    const config = await getDefaultConfig();
-    var urlWithPort;
-    for (let i = 0; i < config.ports.length; i++) {
-      const port = config.ports[i];
-      urlWithPort = 'http://' + url + ':' + port;
-      try {
-        var res = await httpService.get(urlWithPort + '/api');
-        res = JSON.parse(res);
-        if (res.isOnline == true) {
-          sessionStorage.setItem('config', JSON.stringify(res));
-          sessionStorage.setItem('serverUrl', urlWithPort);
-          resolve({
-            state: true
-          });
-        }
-      } catch (error) {}
-    }
+    try {
+      var res = await httpService.get(config.getFullUrl() + '/api');
+      res = JSON.parse(res);
+      if (res.isOnline == true) {
+        sessionStorage.setItem('config', JSON.stringify(res));
+        sessionStorage.setItem('serverUrl', config.getFullUrl());
+        resolve({
+          state: true
+        });
+      }
+    } catch (error) {reject(error);}
     resolve({
       state: false
     });

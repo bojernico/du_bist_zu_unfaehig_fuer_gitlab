@@ -209,6 +209,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.2.0",
+    "axios": "^0.18.0",
     "bootstrap": "4",
     "devtron": "^1.4.0",
     "electron-config": "^2.0.0",

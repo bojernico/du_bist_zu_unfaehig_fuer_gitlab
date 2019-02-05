@@ -22,10 +22,10 @@ function getProtocol() {
 }
 
 /**
- * Returns the full url with an "/" at the end
+ * Returns the full url
  */
 function getFullUrl() {
-  return getProtocol() + '://' + getAddress() + ':' + getPort() + '/';
+  return getProtocol() + '://' + getAddress() + ':' + getPort();
 }
 
 
