@@ -34,9 +34,14 @@ class Verification extends Component {
     ) {
       registerExaminee(this.state.enrolmentNumber, this.state.firstname, this.state.lastname).then((res) => {
         if (res.state) {
+          console.log("inside if(res.state)");
           enroll().then((res) => {
+            console.log("inside enroll().then((res) => {");
+            console.log(res);
+            console.log(res.state);
             if (res.state) {
               this.setState({ correct: true });
+              console.log("render function");
               this.renderFuction();
             }
           });
