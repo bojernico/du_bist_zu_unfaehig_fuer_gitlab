@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TestId from './pin';
 import { testConnection } from '../scripts/setup';
 import styles from './css/serverAddress.css';
+import config from '../config/config';
 
 class serverAddress extends Component {
   state = {
@@ -22,9 +23,8 @@ class serverAddress extends Component {
   }
 
   componentDidMount() {
-    /*
     testConnection(
-      'franklyn.htl-leonding.ac.at'
+      config.getFullUrl()
     ).then(res => {
       if (res.state == true) {
         this.setState({ correct: true });
@@ -32,7 +32,6 @@ class serverAddress extends Component {
         this.setState({ next: true });
       }
     });
-    */
   }
 
   handleSubmit(event) {
