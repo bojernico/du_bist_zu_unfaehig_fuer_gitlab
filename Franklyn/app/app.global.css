@@ -5,7 +5,6 @@
 @import '~@fortawesome/fontawesome-free/css/all.css';
 @import '~bootstrap/dist/css/bootstrap.css';
 
-
 @font-face {
   font-family: "Heebo";
   src:url("./assets/Heebo-Regular.ttf");
@@ -15,11 +14,12 @@ body {
   color: #F7F7F7;
   height: 100vh;
   background-color: #F7F7F7;
-  font-family: 'Heebo';
+  font-family: 'Heebo', sans-serif;
   overflow-y: hidden;
   -webkit-app-region: drag;
   -webkit-user-select: none;
 }
+
 
 
 .titlebar {
