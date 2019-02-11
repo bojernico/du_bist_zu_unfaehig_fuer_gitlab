@@ -55,7 +55,7 @@ class Pin extends Component {
                       type="number"
                       className={this.state.pinInputClass}
                       id="pinInput"
-                      placeholder="PIN"
+                      placeholder="Pin"
                       value={this.state.value}
                       onChange={this.handleChange}
                       autoFocus

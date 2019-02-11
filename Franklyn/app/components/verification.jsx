@@ -34,14 +34,9 @@ class Verification extends Component {
     ) {
       registerExaminee(this.state.enrolmentNumber, this.state.firstname, this.state.lastname).then((res) => {
         if (res.state) {
-          console.log("inside if(res.state)");
           enroll().then((res) => {
-            console.log("inside enroll().then((res) => {");
-            console.log(res);
-            console.log(res.state);
             if (res.state) {
               this.setState({ correct: true });
-              console.log("render function");
               this.renderFuction();
             }
           });
@@ -58,11 +53,11 @@ class Verification extends Component {
   }
 
   validateLastname() {
-    return this.validate(this.state.lastname, new RegExp('^[A-Z][a-zäüöß]+$'));
+    return this.validate(this.state.lastname, new RegExp('^[A-Z][a-zA-Z\-äüöß]+$'));
   }
 
   validateEnrolmentNumber() {
-    return this.validate(this.state.enrolmentNumber, new RegExp('^.+$'));
+    return this.validate(this.state.enrolmentNumber, new RegExp('^.....+$'));
   }
 
   validate(value, regex) {
@@ -95,7 +90,7 @@ class Verification extends Component {
                     className={this.validateEnrolmentNumber(
                       this.state.enrolmentNumber
                     )}
-                    placeholder="Matrikelnummer"
+                    placeholder="ifXXXXXX"
                     value={this.state.enrolmentNumber}
                     onChange={this.handleChange('enrolmentNumber')}
                     autoFocus
@@ -129,7 +124,7 @@ class Verification extends Component {
                 <input
                   type="submit"
                   className="btn btn-primary"
-                  value="Submit"
+                  value="Weiter"
                 />
               </div>
             </form>

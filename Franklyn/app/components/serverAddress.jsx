@@ -81,7 +81,7 @@ class serverAddress extends Component {
                         type="text"
                         id="serverAddress"
                         className={this.validateServerAddress()}
-                        placeholder="SERVER ADDRESS"
+                        placeholder="Server Adresse"
                         value={this.state.serverAddress}
                         onChange={this.handleChangeServerAddress.bind(this)}
                         autoFocus
@@ -91,7 +91,7 @@ class serverAddress extends Component {
                   <input
                     type="submit"
                     className="btn btn-primary btn-black"
-                    value="CONNECT"
+                    value="Verbinden"
                   />
                 </div>{' '}
               </form>
