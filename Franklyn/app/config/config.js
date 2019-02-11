@@ -1,31 +1,34 @@
 //Configurations
+const port = 5005
+const address = 'franklyn.htl-leonding.ac.at'
+const protocol = 'http'
 
 /**
  * Returns the port
  */
 function getPort() {
-  return 5005;
+  return port
 }
 
 /**
  * Returns the address
  */
 function getAddress() {
-  return 'franklyn.htl-leonding.ac.at';
+  return address
 }
 
 /**
  * Returns the Protocol (http, https)
  */
 function getProtocol() {
-  return 'http';
+  return protocol
 }
 
 /**
  * Returns the full url
  */
 function getFullUrl() {
-  return getProtocol() + '://' + getAddress() + ':' + getPort();
+  return getProtocol() + '://' + getAddress() + ':' + getPort()
 }
 
 

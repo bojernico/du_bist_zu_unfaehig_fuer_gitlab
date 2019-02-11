@@ -38,7 +38,7 @@ class serverAddress extends Component {
     //For testing this.setState({ correct: true });
     //For testing this.setState({ next: true });
     testConnection(
-      this.state.serverAddress
+      config.getProtocol() + '://' + this.state.serverAddress + ':' + config.getPort()
     ).then(res => {
       if (res.state == true) {
         //should be true, or an object with an error
