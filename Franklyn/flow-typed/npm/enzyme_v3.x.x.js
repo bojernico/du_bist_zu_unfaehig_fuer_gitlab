@@ -1,32 +1,34 @@
-// flow-typed signature: d14b0723419043e1da47d452c74b726b
-// flow-typed version: 7bd880a082/enzyme_v3.x.x/flow_>=v0.53.x
+// flow-typed signature: 741a238d71e60f17f794be252b94a324
+// flow-typed version: ff97018d54/enzyme_v3.x.x/flow_>=v0.53.x
+
+import * as React from "react";
 
 declare module "enzyme" {
-  declare type PredicateFunction<T: Wrapper<*>> = (
+  declare type PredicateFunction<T: Wrapper> = (
     wrapper: T,
     index: number
   ) => boolean;
-  declare type NodeOrNodes = React$Node | Array<React$Node>;
-  declare type EnzymeSelector = string | {} | React$ElementType;
+  declare type NodeOrNodes = React.Node | Array<React.Node>;
+  declare type EnzymeSelector = string | Class<React.Component<*, *>> | Object;
 
   // CheerioWrapper is a type alias for an actual cheerio instance
   // TODO: Reference correct type from cheerio's type declarations
   declare type CheerioWrapper = any;
 
-  declare class Wrapper<RootComponent> {
+  declare class Wrapper {
     find(selector: EnzymeSelector): this,
     findWhere(predicate: PredicateFunction<this>): this,
     filter(selector: EnzymeSelector): this,
     filterWhere(predicate: PredicateFunction<this>): this,
     hostNodes(): this,
     contains(nodeOrNodes: NodeOrNodes): boolean,
-    containsMatchingElement(node: React$Node): boolean,
+    containsMatchingElement(node: React.Node): boolean,
     containsAllMatchingElements(nodes: NodeOrNodes): boolean,
     containsAnyMatchingElements(nodes: NodeOrNodes): boolean,
     dive(option?: { context?: Object }): this,
     exists(selector?: EnzymeSelector): boolean,
     isEmptyRender(): boolean,
-    matchesElement(node: React$Node): boolean,
+    matchesElement(node: React.Node): boolean,
     hasClass(className: string): boolean,
     is(selector: EnzymeSelector): boolean,
     isEmpty(): boolean,
@@ -37,11 +39,10 @@ declare module "enzyme" {
     parent(): this,
     closest(selector: EnzymeSelector): this,
     render(): CheerioWrapper,
-    renderProp(propName: string): (...args: Array<any>) => this,
     unmount(): this,
     text(): string,
     html(): string,
-    get(index: number): React$Node,
+    get(index: number): React.Node,
     getDOMNode(): HTMLElement | HTMLInputElement,
     at(index: number): this,
     first(): this,
@@ -52,12 +53,11 @@ declare module "enzyme" {
     prop(key: string): any,
     key(): string,
     simulate(event: string, ...args: Array<any>): this,
-    simulateError(error: Error): this,
     slice(begin?: number, end?: number): this,
-    setState(state: {}, callback?: () => void): this,
-    setProps(props: {}, callback?: () => void): this,
+    setState(state: {}, callback?: Function): this,
+    setProps(props: {}, callback?: Function): this,
     setContext(context: Object): this,
-    instance(): React$ElementRef<RootComponent>,
+    instance(): React.Component<*, *>,
     update(): this,
     debug(options?: Object): string,
     type(): string | Function | null,
@@ -79,39 +79,39 @@ declare module "enzyme" {
     length: number
   }
 
-  declare class ReactWrapper<T> extends Wrapper<T> {
-    constructor(nodes: React$Element<T>, root: any, options?: ?Object): ReactWrapper<T>,
+  declare class ReactWrapper extends Wrapper {
+    constructor(nodes: NodeOrNodes, root: any, options?: ?Object): ReactWrapper,
     mount(): this,
     ref(refName: string): this,
     detach(): void
   }
 
-  declare class ShallowWrapper<T> extends Wrapper<T> {
+  declare class ShallowWrapper extends Wrapper {
     constructor(
-      nodes: React$Element<T>,
+      nodes: NodeOrNodes,
       root: any,
       options?: ?Object
-    ): ShallowWrapper<T>,
-    equals(node: React$Node): boolean,
-    shallow(options?: { context?: Object }): ShallowWrapper<T>,
-    getElement(): React$Node,
-    getElements(): Array<React$Node>
+    ): ShallowWrapper,
+    equals(node: React.Node): boolean,
+    shallow(options?: { context?: Object }): ShallowWrapper,
+    getElement(): React.Node,
+    getElements(): Array<React.Node>
   }
 
-  declare function shallow<T>(
-    node: React$Element<T>,
+  declare function shallow(
+    node: React.Node,
     options?: { context?: Object, disableLifecycleMethods?: boolean }
-  ): ShallowWrapper<T>;
-  declare function mount<T>(
-    node: React$Element<T>,
+  ): ShallowWrapper;
+  declare function mount(
+    node: React.Node,
     options?: {
       context?: Object,
       attachTo?: HTMLElement,
       childContextTypes?: Object
     }
-  ): ReactWrapper<T>;
-  declare function render<T>(
-    node: React$Element<T>,
+  ): ReactWrapper;
+  declare function render(
+    node: React.Node,
     options?: { context?: Object }
   ): CheerioWrapper;
 

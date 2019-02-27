@@ -20,7 +20,9 @@ async function testConnection(url) {
           state: true
         });
       }
-    } catch (error) { reject(error); }
+    } catch (error) {
+      reject(error);
+    }
     resolve({
       state: false
     });

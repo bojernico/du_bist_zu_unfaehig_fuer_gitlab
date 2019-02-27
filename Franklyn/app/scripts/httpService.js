@@ -1,5 +1,6 @@
 const request = require('request');
 const axios = require('axios');
+const os = require('os');
 
 /**
  * Sends http get request 
@@ -41,14 +42,43 @@ function get(url, params, headers) {
  * @returns {Promise}
  */
 function post(url, headers, data) {
+  console.log(data);
   return new Promise((resolve, reject) => {
-      axios.post(url, data, { headers: headers })
-      .then(function (res) {
-        resolve(res.request.response);
-      })
-      .catch(function (error) {
-        reject(error);
+    if (os.platform == 'darwin') {
+      var options = {
+        method: 'POST',
+        url: url,
+        headers: headers,
+        body: JSON.stringify(data),
+      };
+      request(options, (error, response, body) => {
+        if (!error && response.statusCode == 200) resolve(body);
+        else if (error) reject(error);
+        else {
+          reject({
+            statusCode: response.statusCode,
+            response: body
+          });
+        }
       });
+    } else {
+      axios.post(url, data, {
+          headers: headers
+        })
+        .then(function (res) {
+          resolve({
+            statusCode: response.statusCode,
+            response: res.request.response.body
+          })
+          resolve(res.request.response);
+        })
+        .catch(function (error) {
+          reject({
+            statusCode: error,
+            response: error
+          });
+        });
+    }
   });
 }
 
