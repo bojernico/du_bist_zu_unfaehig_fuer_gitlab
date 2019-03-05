@@ -42,7 +42,6 @@ function get(url, params, headers) {
  * @returns {Promise}
  */
 function post(url, headers, data) {
-  console.log(data);
   return new Promise((resolve, reject) => {
     if (os.platform == 'darwin') {
       var options = {
@@ -63,13 +62,9 @@ function post(url, headers, data) {
       });
     } else {
       axios.post(url, data, {
-          headers: headers
-        })
+        headers: headers
+      })
         .then(function (res) {
-          resolve({
-            statusCode: response.statusCode,
-            response: res.request.response.body
-          })
           resolve(res.request.response);
         })
         .catch(function (error) {
