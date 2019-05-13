@@ -1,6 +1,6 @@
 //Configurations
 const port = 5005
-const address = 'franklyn-odroid.fritz.box'
+const address = 'franklyn.htl-leonding.ac.at'
 const protocol = 'http'
 
 /**
