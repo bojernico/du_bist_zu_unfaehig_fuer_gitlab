@@ -16,8 +16,11 @@ cd Franklyn
 
 # Install dependencies
 yarn
-# Run the app (Development Mode)
+# Run the app in development mode
 yarn dev
+
+# OR
+
 # Run the app without the developer console
 yarn start
 ```
