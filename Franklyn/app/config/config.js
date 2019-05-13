@@ -1,7 +1,7 @@
 //Configurations
 const port = 5005
 const address = 'franklyn.htl-leonding.ac.at'
-const protocol = 'http'
+const useHttps = true;
 
 /**
  * Returns the port
@@ -21,16 +21,23 @@ function getAddress() {
  * Returns the Protocol (http, https)
  */
 function getProtocol() {
-  return protocol
+  if (useHttps) return 'https'
+  return http
 }
 
 /**
  * Returns the full url
  */
 function getFullUrl() {
-  return getProtocol() + '://' + getAddress() + ':' + getPort()
+  return getProtocol() + '://' + getAddress()
 }
 
+/**
+ * Returns the full url
+ */
+function getFullUrlWithPort() {
+  return getProtocol() + '://' + getAddress() + ':' + getPort()
+}
 
 module.exports.getPort = getPort;
 module.exports.getAddress = getAddress;
