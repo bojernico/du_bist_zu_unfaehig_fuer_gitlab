@@ -32,7 +32,11 @@ class Verification extends Component {
       this.validateFirstname() === 'form-control is-valid' &&
       this.validateLastname() === 'form-control is-valid'
     ) {
-      registerExaminee(this.state.enrolmentNumber, this.state.firstname, this.state.lastname).then((res) => {
+      var firstname = this.state.firstname;
+      firstname = firstname.charAt(0).toUpperCase() + firstname.slice(1).toLowerCase();
+      var lastname = this.state.lastname;
+      lastname = lastname.charAt(0).toUpperCase() + lastname.slice(1).toLowerCase();
+      registerExaminee(this.state.enrolmentNumber, firstname, lastname).then((res) => {
         if (res.state) {
           enroll().then((res) => {
             if (res.state) {
@@ -49,11 +53,11 @@ class Verification extends Component {
   }
 
   validateFirstname() {
-    return this.validate(this.state.firstname, new RegExp('^[A-Z][a-zäüöß]+$'));
+    return this.validate(this.state.firstname, new RegExp('^[A-Za-zäüöß]{2,}$'));
   }
 
   validateLastname() {
-    return this.validate(this.state.lastname, new RegExp('^[A-Z][a-zA-Z\-äüöß]+$'));
+    return this.validate(this.state.lastname, new RegExp('^[A-Za-zäüöß]{2,}$'));
   }
 
   validateEnrolmentNumber() {

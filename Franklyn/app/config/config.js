@@ -22,7 +22,7 @@ function getAddress() {
  */
 function getProtocol() {
   if (useHttps) return 'https'
-  return http
+  return 'http'
 }
 
 /**
