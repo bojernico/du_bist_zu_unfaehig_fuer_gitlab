@@ -13,40 +13,52 @@ class serverAddress extends Component {
     connectionMessage: '',
     connection: false,
     wrongAttempt: false,
-    title: ''
+    title: '',
+    connection: "neverTried",  //neverTried, noConnection, connected
+    allOK: false,
+    noConnection: false
   };
 
   constructor(props) {
     super(props);
-    // this.handleChange = this.handleChange.bind(this);
+    this.checkConnection = this.checkConnection.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.checkConnection()
   }
-
   componentDidMount() {
     testConnection(
       config.getFullUrl()
     ).then(res => {
       if (res.state == true) {
         this.setState({ correct: true });
-        this.setState({ connection: true });
         this.setState({ next: true });
       }
     });
   }
+  checkConnection() {
+    testConnection(config.getFullUrl())
+      .then(res => {
+        if (res.state == true) {
+          this.setState({ connection: "connected" });
+        }
+        else {
+          this.setState({ connection: "noConnection" })
+        }
+      })
+      .catch(err => {
+        this.setState({ connection: "noConnection" })
+      })
 
+  }
   handleSubmit(event) {
-    //For testing this.setState({ correct: true });
-    //For testing this.setState({ next: true });
     testConnection(
       config.getProtocol() + '://' + this.state.serverAddress + ':' + config.getPort()
     ).then(res => {
       if (res.state == true) {
         //should be true, or an object with an error
         this.setState({ correct: true });
-        this.setState({ connection: true });
       } else {
         this.setState({ wrongAttempt: true });
-        this.setState({ connection: false });
       }
     });
     this.setState({ next: true });
@@ -65,10 +77,13 @@ class serverAddress extends Component {
     this.setState({ serverAddress: event.target.value });
   }
 
-  renderFuction() {
-    if (this.state.next && this.state.correct) {
-      return <TestId />;
-    } else {
+  render() {
+    console.log("CONNECTION IN RENDER:", this.state.connection);
+    if (this.state.connection === "neverTried") {
+      return <div></div>;
+    }
+    if (this.state.connection === "connected") return <TestId />;
+    else {
       return (
         <React.Fragment>
           <div className="vertical-center">
@@ -100,10 +115,8 @@ class serverAddress extends Component {
           </div>
         </React.Fragment>
       );
+
     }
-  }
-  render() {
-    return this.renderFuction();
   }
 }
 export default serverAddress;
