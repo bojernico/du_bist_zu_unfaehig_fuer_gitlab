@@ -9,7 +9,8 @@ class Verification extends Component {
     firstname: '',
     lastname: '',
     next: false,
-    correct: false
+    correct: false,
+    alreadyRegistered: false
   };
 
   constructor(props) {
@@ -36,16 +37,19 @@ class Verification extends Component {
       firstname = firstname.charAt(0).toUpperCase() + firstname.slice(1).toLowerCase();
       var lastname = this.state.lastname;
       lastname = lastname.charAt(0).toUpperCase() + lastname.slice(1).toLowerCase();
-      registerExaminee(this.state.enrolmentNumber, firstname, lastname).then((res) => {
-        if (res.state) {
-          enroll().then((res) => {
-            if (res.state) {
-              this.setState({ correct: true });
-              this.renderFuction();
-            }
-          });
-        }
-      });
+      if (!this.state.alreadyRegistered) {
+        registerExaminee(this.state.enrolmentNumber, firstname, lastname).then((res) => {
+          this.setState({ alreadyRegistered: true });
+          if (res.state) {
+            enroll().then((res) => {
+              if (res.state) {
+                this.setState({ correct: true });
+                this.render();
+              }
+            });
+          }
+        });
+      }
 
     }
     this.setState({ next: true });
@@ -61,7 +65,7 @@ class Verification extends Component {
   }
 
   validateEnrolmentNumber() {
-    return this.validate(this.state.enrolmentNumber, new RegExp('^.....+$'));
+    return this.validate(this.state.enrolmentNumber, new RegExp('^.{5,}$'));
   }
 
   validate(value, regex) {
@@ -74,7 +78,7 @@ class Verification extends Component {
     return 'form-control';
   }
 
-  renderFuction() {
+  render() {
     if (this.state.next && this.state.correct) {
       return (
         <Overview
@@ -137,9 +141,6 @@ class Verification extends Component {
         </div>
       );
     }
-  }
-  render() {
-    return this.renderFuction();
   }
 }
 export default Verification;
