@@ -62,7 +62,7 @@ async function getExamToken(pin, date) {
 
 /**
  * Registers examinee for exam and calls getExamineeToken
- * @author cs, mh
+ * @author cs
  * @param {String} enrolmentNumber
  * @param {String} firstname
  * @param {String} lastname
@@ -79,15 +79,8 @@ async function registerExaminee(enrolmentNumber, firstname, lastname) {
       firstname: firstname,
       lastname: lastname
     };
-    var res = JSON.parse(await httpService.post(url, headers, body));
-    console.log(res);
-    if (res.firstname != firstname || res.lastname != lastname) { //update examinee if the name changed
-      var params = [];
-      params.push(res._id) //has an id, if it existed in the database
-      res = JSON.parse(await httpService.put(url, params, headers, body));
-      console.log(res);
-    }
-    res = await getExamineeToken(res._id);
+    var res = await httpService.post(url, headers, body);
+    res = await getExamineeToken(JSON.parse(res)._id);
     return {
       state: true,
       response: res
