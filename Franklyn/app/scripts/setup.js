@@ -4,7 +4,7 @@ const httpService = require('./httpService');
 /**
  * Check if ip and port are correct and server is online
  * Save the serverUrl in sessionStorage
- * @author cs
+ * @author cs, hg
  * @param {String} url url
  * @returns {Boolean}
  */
@@ -16,6 +16,7 @@ async function testConnection(url) {
       if (res.isOnline == true) {
         sessionStorage.setItem('config', JSON.stringify(res));
         sessionStorage.setItem('serverUrl', url);
+        sessionStorage.setItem('version', res.version);
         resolve({
           state: true
         });

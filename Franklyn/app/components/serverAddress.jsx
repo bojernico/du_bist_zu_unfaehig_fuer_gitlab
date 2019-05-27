@@ -3,6 +3,7 @@ import TestId from './pin';
 import { testConnection } from '../scripts/setup';
 import styles from './css/serverAddress.css';
 import config from '../config/config';
+import packageJson from '../package.json';
 
 class serverAddress extends Component {
   state = {
@@ -14,7 +15,7 @@ class serverAddress extends Component {
     connection: false,
     wrongAttempt: false,
     title: '',
-    connection: "neverTried",  //neverTried, noConnection, connected
+    connection: "neverTried",  //neverTried, noConnection, connected, wrongVersion
     allOK: false,
     noConnection: false
   };
@@ -23,7 +24,12 @@ class serverAddress extends Component {
     super(props);
     this.checkConnection = this.checkConnection.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.checkConnection()
+    this.checkConnection();
+    console.log(sessionStorage.getItem("version") == packageJson.version);
+    if (sessionStorage.getItem("version") !== packageJson.version) {
+      this.setState({ connection: "wrongVersion" });
+      return;
+    }
   }
   componentDidMount() {
     testConnection(
@@ -39,7 +45,13 @@ class serverAddress extends Component {
     testConnection(config.getFullUrl())
       .then(res => {
         if (res.state == true) {
-          this.setState({ connection: "connected" });
+          console.log(sessionStorage.getItem("version") == packageJson.version);
+          if (sessionStorage.getItem("version") !== packageJson.version) {
+            this.setState({ connection: "wrongVersion" });
+          }
+          else {
+            this.setState({ connection: "connected" });
+          }
         }
         else {
           this.setState({ connection: "noConnection" })
@@ -78,12 +90,13 @@ class serverAddress extends Component {
   }
 
   render() {
-    console.log("CONNECTION IN RENDER:", this.state.connection);
+    console.log(this.state.connection)
     if (this.state.connection === "neverTried") {
       return <div></div>;
     }
     if (this.state.connection === "connected") return <TestId />;
-    else {
+    else if (this.state.connection === "wrongVersion") return <TestId wrongVersion={true} />;
+    else
       return (
         <React.Fragment>
           <div className="vertical-center">
@@ -116,7 +129,7 @@ class serverAddress extends Component {
         </React.Fragment>
       );
 
-    }
   }
 }
+
 export default serverAddress;

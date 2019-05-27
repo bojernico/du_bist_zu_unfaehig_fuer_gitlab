@@ -1,6 +1,6 @@
 {
   "name": "franklyn",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Franklyn is an exam support system.",
   "main": "./main.prod.js",
   "author": "Hannes Gerstmayr, Michael Helcig, Christian Strassmayr <a@b.com>",

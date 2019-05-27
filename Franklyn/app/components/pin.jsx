@@ -8,7 +8,7 @@ class Pin extends Component {
     value: '',
     pin: '',
     next: false,
-    pinInputClass: 'form-control'
+    pinInputClass: 'form-control',
   };
 
   constructor(props) {
@@ -29,7 +29,7 @@ class Pin extends Component {
       getExamToken(event.target.value, new Date()).then(res => {
         if (res.state) {
           this.setState({ next: true }, () => {
-            this.renderFuction();
+            this.render();
           });
         } else {
           this.setState({ pinInputClass: 'form-control is-invalid' });
@@ -40,10 +40,43 @@ class Pin extends Component {
     }
   }
 
-  renderFuction() {
+  render() {
     if (this.state.next) {
       return <Verification />;
-    } else {
+    } else if (this.props.wrongVersion) {
+      return (
+        <React.Fragment>
+          <div className="vertical-center">
+            <div className="container">
+              <form onSubmit={e => { e.preventDefault(); }}>
+                <div className="form-group">
+                  <label>
+                    <input
+                      type="number"
+                      className={this.state.pinInputClass}
+                      id="pinInput"
+                      placeholder="Pin"
+                      value={this.state.value}
+                      onChange={this.handleChange}
+                      autoFocus
+                      disabled
+                    />
+                  </label>
+                </div>
+                <div align="center">
+                  <h3>Bitte die aktuelle Version des Clients benutzen.</h3>
+                </div>
+              </form>
+              <div>
+                <h1 className={styles.titleWrongVersion}>Franklyn</h1>
+              </div>
+            </div>
+          </div>
+        </React.Fragment>
+      );
+
+    }
+    else {
       return (
         <React.Fragment>
           <div className="vertical-center">
@@ -68,13 +101,9 @@ class Pin extends Component {
               </div>
             </div>
           </div>
-
         </React.Fragment>
       );
     }
-  }
-  render() {
-    return this.renderFuction();
   }
 }
 export default Pin;
