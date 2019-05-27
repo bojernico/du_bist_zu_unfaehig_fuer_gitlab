@@ -8,8 +8,6 @@ import packageJson from '../package.json';
 class serverAddress extends Component {
   state = {
     serverAddress: '',
-    next: false,
-    correct: false,
     language: 'de',
     connectionMessage: '',
     connection: false,
@@ -25,27 +23,12 @@ class serverAddress extends Component {
     this.checkConnection = this.checkConnection.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.checkConnection();
-    console.log(sessionStorage.getItem("version") == packageJson.version);
-    if (sessionStorage.getItem("version") !== packageJson.version) {
-      this.setState({ connection: "wrongVersion" });
-      return;
-    }
   }
-  componentDidMount() {
-    testConnection(
-      config.getFullUrl()
-    ).then(res => {
-      if (res.state == true) {
-        this.setState({ correct: true });
-        this.setState({ next: true });
-      }
-    });
-  }
+
   checkConnection() {
     testConnection(config.getFullUrl())
       .then(res => {
         if (res.state == true) {
-          console.log(sessionStorage.getItem("version") == packageJson.version);
           if (sessionStorage.getItem("version") !== packageJson.version) {
             this.setState({ connection: "wrongVersion" });
           }
@@ -66,14 +49,10 @@ class serverAddress extends Component {
     testConnection(
       config.getProtocol() + '://' + this.state.serverAddress + ':' + config.getPort()
     ).then(res => {
-      if (res.state == true) {
-        //should be true, or an object with an error
-        this.setState({ correct: true });
-      } else {
+      if (res.state != true) {
         this.setState({ wrongAttempt: true });
       }
     });
-    this.setState({ next: true });
     event.preventDefault();
   }
 
@@ -90,7 +69,6 @@ class serverAddress extends Component {
   }
 
   render() {
-    console.log(this.state.connection)
     if (this.state.connection === "neverTried") {
       return <div></div>;
     }
@@ -128,7 +106,6 @@ class serverAddress extends Component {
           </div>
         </React.Fragment>
       );
-
   }
 }
 
