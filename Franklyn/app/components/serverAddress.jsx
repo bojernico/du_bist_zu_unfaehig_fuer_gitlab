@@ -8,14 +8,9 @@ import packageJson from '../package.json';
 class serverAddress extends Component {
   state = {
     serverAddress: '',
-    language: 'de',
-    connectionMessage: '',
-    connection: false,
     wrongAttempt: false,
     title: '',
-    connection: "neverTried",  //neverTried, noConnection, connected, wrongVersion
-    allOK: false,
-    noConnection: false
+    connection: "neverTried"  //neverTried, noConnection, connected, wrongVersion
   };
 
   constructor(props) {
