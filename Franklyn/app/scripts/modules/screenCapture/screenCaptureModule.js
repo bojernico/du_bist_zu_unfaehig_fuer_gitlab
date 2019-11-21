@@ -100,8 +100,7 @@ function startup() {
             if (error) throw error;
             for (let i = 0; i < sources.length; ++i) {
                 if (sources[i].name === 'Entire screen') {
-                    navigator.mediaDevices
-                        .getUserMedia({
+                    navigator.mediaDevices.getUserMedia({
                             audio: false,
                             video: {
                                 mandatory: {

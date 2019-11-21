@@ -98,7 +98,7 @@ class Verification extends Component {
                     className={this.validateEnrolmentNumber(
                       this.state.enrolmentNumber
                     )}
-                    placeholder="Benutzer"
+                    placeholder="Benutzer (if...)"
                     value={this.state.enrolmentNumber}
                     onChange={this.handleChange('enrolmentNumber')}
                     autoFocus

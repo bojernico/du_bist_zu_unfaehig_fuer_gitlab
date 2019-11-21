@@ -1,5 +1,5 @@
-// flow-typed signature: d39f8c42e21629554940dda3bcbe90e6
-// flow-typed version: b80967946f/babel-register_v6.x.x/flow_>=v0.30.x
+// flow-typed signature: 1adc7842e488239cbde2aac78a4a1a06
+// flow-typed version: c6154227d1/babel-register_v6.x.x/flow_>=v0.30.x <=v0.103.x
 
 declare module 'babel-register' {
   declare type Options = {|

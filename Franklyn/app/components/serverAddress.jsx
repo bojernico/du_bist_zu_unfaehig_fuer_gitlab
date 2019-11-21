@@ -44,8 +44,16 @@ class serverAddress extends Component {
     testConnection(
       config.getProtocol() + '://' + this.state.serverAddress + ':' + config.getPort()
     ).then(res => {
-      if (res.state != true) {
+      if (res.state !== true) {
         this.setState({ wrongAttempt: true });
+      }
+      else {
+        if (sessionStorage.getItem("version") !== packageJson.version) {
+          this.setState({ connection: "wrongVersion" });
+        }
+        else {
+          this.setState({ connection: "connected" });
+        }
       }
     });
     event.preventDefault();
