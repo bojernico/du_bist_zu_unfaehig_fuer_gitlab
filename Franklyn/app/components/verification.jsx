@@ -40,14 +40,12 @@ class Verification extends Component {
       var lastname = this.state.lastname;
       lastname = lastname.charAt(0).toUpperCase() + lastname.slice(1).toLowerCase();
       if (this.state.checked) {
-        console.log("checkbox: ", this.state.checked);
         enroll(firstname, lastname, true).then((res) => {
           if (res.state) {
             this.setState({ correct: true });
             this.render();
           }
         });
-        return;
       }
       enroll(firstname, lastname, false).then((res) => {
         if (res.state) {
