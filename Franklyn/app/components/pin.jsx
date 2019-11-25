@@ -64,7 +64,7 @@ class Pin extends Component {
                   </label>
                 </div>
                 <div align="center">
-                  <h3>Bitte die aktuelle Version des Clients benutzen.</h3>
+                  <h4>Bitte die aktuelle Version des Clients benutzen.</h4>
                 </div>
               </form>
               <div>

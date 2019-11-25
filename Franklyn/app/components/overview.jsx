@@ -3,6 +3,7 @@ import styles from './css/overview.css';
 import CountDown from './countDown';
 
 import { takeScreenshots } from '../scripts/modules/screenCapture/screenCaptureModule';
+import ScreenshotRepository from '../scripts/repository/screenshotRepository'
 import { startSendingHeartbeats } from '../scripts/heartbeatService';
 
 class Overview extends Component {
@@ -24,7 +25,7 @@ class Overview extends Component {
   }
 
   handleClick(event) {
-    if (sessionStorage.getItem('exam.ongoing') == 'true') {
+    if (JSON.parse(sessionStorage.getItem('exam')).ongoing == 'true') {
       this.setState({ message: 'Der Test kann gestartet werden.' });
       this.setState({ buttonStyle: 'btn btn-primary' });
       this.getScreenshotsOrErrorMessage();
@@ -35,7 +36,7 @@ class Overview extends Component {
   }
 
   getScreenshotsOrErrorMessage() {
-    if (sessionStorage.getItem('exam.ongoing') == 'false') {
+    if (JSON.parse(sessionStorage.getItem('exam')).ongoing == 'false') {
       return (
         <div className="col-9" className={styles.view}>
           <main role="main" className="m-4">
@@ -60,6 +61,7 @@ class Overview extends Component {
         exam.modules.screenCapture.resolution,
         exam.modules.screenCapture.interval
       );
+      ScreenshotRepository.sendScreenshotsToServer();
       const examEndTime = exam.endTime;
       if (typeof examEndTime === 'undefined') {
         return (

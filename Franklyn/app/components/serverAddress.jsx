@@ -24,7 +24,7 @@ class serverAddress extends Component {
     testConnection(config.getFullUrl())
       .then(res => {
         if (res.state == true) {
-          if (sessionStorage.getItem("version") !== packageJson.version) {
+          if (JSON.parse(sessionStorage.getItem("config")).version !== packageJson.version) {
             this.setState({ connection: "wrongVersion" });
           }
           else {

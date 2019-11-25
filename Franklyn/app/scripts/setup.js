@@ -1,5 +1,5 @@
 const httpService = require('./httpService');
-//const config = require('../config/config');
+const ScreenshotRepository = require('./repository/screenshotRepository');
 
 /**
  * Check if ip and port are correct and server is online
@@ -16,7 +16,7 @@ async function testConnection(url) {
       if (res.isOnline == true) {
         sessionStorage.setItem('config', JSON.stringify(res));
         sessionStorage.setItem('serverUrl', url);
-        sessionStorage.setItem('version', res.version);
+        sessionStorage.setItem('serverTimeDifference', new Date((JSON.parse(sessionStorage.getItem('config'))).timestamp) - Date.now()); //to ensure the screenshots are sent with the correct time
         resolve({
           state: true
         });
@@ -61,46 +61,6 @@ async function getExamToken(pin, date) {
 }
 
 /**
- * Registers examinee for exam and calls getExamineeToken
- * @author cs
- * @param {String} enrolmentNumber
- * @param {String} firstname
- * @param {String} lastname
- * @returns {Object} With the state true, or false and an error
- */
-async function registerExaminee(enrolmentNumber, firstname, lastname) {
-  try {
-    var url = sessionStorage.getItem('serverUrl') + '/api/examinees';
-    var headers = {
-      'Content-Type': 'application/json'
-    };
-    var body = {
-      enrolmentNumber: enrolmentNumber,
-      firstname: firstname,
-      lastname: lastname
-    };
-    var res = JSON.parse(await httpService.post(url, headers, body));
-    console.log(res);
-    if (res.firstname != firstname || res.lastname != lastname) { //update examinee if the name changed
-      var params = [];
-      params.push(res._id) //has an id, if it existed in the database
-      res = JSON.parse(await httpService.put(url, params, headers, body));
-      console.log(res);
-    }
-    res = await getExamineeToken(res._id);
-    return {
-      state: true,
-      response: res
-    }
-  } catch (error) {
-    return {
-      state: false,
-      error: error
-    };
-  }
-}
-
-/**
  * Get token of examinee and save it into sessionStorage
  * @author cs
  * @param {ObjectId} id
@@ -131,10 +91,10 @@ async function getExamineeToken(id) {
 
 /**
  * Enroll examinee for exam
- * @author cs
+ * @author cs, hg
  * @returns {Object} With the state true, or false and an error
  */
-async function enroll() {
+async function enroll(firstname, lastname, alreadyRegistered) {
   try {
     var url = sessionStorage.getItem('serverUrl') + '/api/exams/enroll';
     var headers = {
@@ -142,8 +102,51 @@ async function enroll() {
       'x-auth-token-exam': sessionStorage.getItem('x-auth-token-exam'),
       'x-auth-token': sessionStorage.getItem('x-auth-token')
     };
-    var res = await httpService.put(url, null, headers, {});
-    sessionStorage.setItem('exam', res);
+    var body = {
+      'firstname': firstname,
+      'lastname': lastname
+    };
+    //if (!alreadyRegistered) {
+    var res = await httpService.put(url, null, headers, body);
+    if (res === 'Duplicate name detected.') {
+      console.log("false: Duplicate name detected")
+      return {
+        state: false,
+      };
+    }
+
+    sessionStorage.setItem('exam', JSON.stringify(JSON.parse(res).exam));
+    sessionStorage.setItem('examinee', JSON.stringify(JSON.parse(res).examinee));
+
+    await getExamineeToken(JSON.parse(res).examinee._id);
+    //}
+    await getOwnExamineeDetails();
+    return {
+      state: true
+    };
+  } catch (error) {
+    console.log("false: ", error)
+    return {
+      state: false,
+      error: error
+    }
+  }
+}
+
+async function getOwnExamineeDetails() {
+  try {
+    var url = sessionStorage.getItem('serverUrl') + '/api/exams/ownExamineeDetails';
+    var headers = {
+      'Content-Type': 'application/json',
+      'x-auth-token-exam': sessionStorage.getItem('x-auth-token-exam'),
+      'x-auth-token': sessionStorage.getItem('x-auth-token')
+    };
+    var res = await httpService.get(url, null, headers);
+    sessionStorage.setItem('examineeDetails', res);
+
+    if ((JSON.parse(sessionStorage.getItem('examineeDetails'))).modules.screenCapture) {
+      ScreenshotRepository.setScreenshotNumber((JSON.parse(sessionStorage.getItem('examineeDetails'))).modules.screenCapture.latestScreenshotnumber);
+    }
     return {
       state: true
     };
@@ -158,5 +161,4 @@ async function enroll() {
 module.exports.testConnection = testConnection;
 module.exports.getExamToken = getExamToken;
 module.exports.getExamineeToken = getExamineeToken;
-module.exports.registerExaminee = registerExaminee;
 module.exports.enroll = enroll;

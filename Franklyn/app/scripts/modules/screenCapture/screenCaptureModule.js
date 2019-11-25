@@ -1,9 +1,10 @@
 const os = require('os');
-const { sleep } = require('../../utils/sleep');
+const {
+    sleep
+} = require('../../utils/sleep');
 const screenCaptureMacOs = require('./screenCapture_macOS');
-const httpService = require('../../httpService');
 var continueScreenshotting = false;
-var screenshotNumber = 1;
+const ScreenshotRepository = require('../../repository/screenshotRepository');
 
 /**
  * Start taking screenshots of desktop and send them to the server.
@@ -24,6 +25,7 @@ async function takeScreenshots(resolution, interval) {
             w = null;
     }
     continueScreenshotting = true;
+
     var base64Data;
     do {
         if (os.platform == 'darwin') {
@@ -35,7 +37,8 @@ async function takeScreenshots(resolution, interval) {
         } else {
             base64Data = getScreenshot(w, 'image/jpeg');
         }
-        await sendScreenshotToServer(base64Data);
+        ScreenshotRepository.addNewScreenshot(new String(base64Data));
+        console.log(ScreenshotRepository.countInCache());
         await sleep(interval * 1000);
     } while (continueScreenshotting);
 }
@@ -48,36 +51,10 @@ function stopScreenshotting() {
     continueScreenshotting = false;
 }
 
-/**
- * Sends base64Data to Server.
- * @author mh
- * @param {String} base64Data
- * @return {Promise}
- */
-async function sendScreenshotToServer(base64Data) {
-    try {
-        var url = sessionStorage.getItem('serverUrl') + '/api/screenshots';
-        var headers = {
-            'Content-Type': 'application/json',
-            'x-auth-token': sessionStorage.getItem('x-auth-token'),
-            'x-auth-token-exam': sessionStorage.getItem('x-auth-token-exam')
-        };
-        var body = {
-            screenshotNumber: screenshotNumber,
-            timestamp: '' + Date.now(),
-            base64Data: base64Data
-        };
-        var res = await httpService.post(url, headers, body);
-        if (res == 'Screenshot saved.') {
-            screenshotNumber++;
-        }
-    } catch (error) {
-        return error;
-    }
-}
-
 //SCREENCAPTURER
-const { desktopCapturer } = require('electron');
+const {
+    desktopCapturer
+} = require('electron');
 const fs = require('fs');
 
 var width = 1280; // The default width of the screenshot
@@ -94,13 +71,14 @@ var setUp = -1; //<0 screen capture not set up; 0 setting up screen capture; >0 
  */
 function startup() {
     desktopCapturer.getSources({
-            types: ['screen']
-        },
+        types: ['screen']
+    },
         (error, sources) => {
             if (error) throw error;
             for (let i = 0; i < sources.length; ++i) {
                 if (sources[i].name === 'Entire screen') {
-                    navigator.mediaDevices.getUserMedia({
+                    navigator.mediaDevices
+                        .getUserMedia({
                             audio: false,
                             video: {
                                 mandatory: {

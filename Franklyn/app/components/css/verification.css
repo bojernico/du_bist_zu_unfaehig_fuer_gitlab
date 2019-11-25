@@ -6,5 +6,8 @@
   margin-top: 90px;
   margin-left: 305px;
   position: fixed;
+}
 
+.registeredLabel {
+  color: #00090C;
 }
