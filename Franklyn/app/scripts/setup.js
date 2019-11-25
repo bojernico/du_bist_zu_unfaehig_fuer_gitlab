@@ -102,24 +102,32 @@ async function enroll(firstname, lastname, alreadyRegistered) {
       'x-auth-token-exam': sessionStorage.getItem('x-auth-token-exam'),
       'x-auth-token': sessionStorage.getItem('x-auth-token')
     };
-    var body = {
-      'firstname': firstname,
-      'lastname': lastname
-    };
-    //if (!alreadyRegistered) {
-    var res = await httpService.put(url, null, headers, body);
-    if (res === 'Duplicate name detected.') {
-      console.log("false: Duplicate name detected")
-      return {
-        state: false,
+    var body;
+    if (alreadyRegistered) {
+      body = {
+        'firstname': firstname,
+        'lastname': lastname,
+        'alreadyRegistered': true
+      };
+    } else {
+      body = {
+        'firstname': firstname,
+        'lastname': lastname
       };
     }
-
+    var res = await httpService.put(url, null, headers, body);
+    if (alreadyRegistered) {
+      if (res === 'Duplicate name detected.') {
+        console.log("false: Duplicate name detected")
+        return {
+          state: false,
+        };
+      }
+    }
     sessionStorage.setItem('exam', JSON.stringify(JSON.parse(res).exam));
     sessionStorage.setItem('examinee', JSON.stringify(JSON.parse(res).examinee));
 
     await getExamineeToken(JSON.parse(res).examinee._id);
-    //}
     await getOwnExamineeDetails();
     return {
       state: true

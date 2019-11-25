@@ -43,17 +43,12 @@ class Verification extends Component {
         console.log("checkbox: ", this.state.checked);
         enroll(firstname, lastname, true).then((res) => {
           if (res.state) {
-            enroll().then((res) => {
-              if (res.state) {
-                this.setState({ correct: true });
-                this.render();
-              }
-            });
+            this.setState({ correct: true });
+            this.render();
           }
         });
         return;
       }
-      //Duplikate werden nicht erkannt, 2x "max muster" liefert res.state=true
       enroll(firstname, lastname, false).then((res) => {
         if (res.state) {
           this.setState({ correct: true });
