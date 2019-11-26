@@ -74,7 +74,6 @@ class Pin extends Component {
           </div>
         </React.Fragment>
       );
-
     }
     else {
       return (

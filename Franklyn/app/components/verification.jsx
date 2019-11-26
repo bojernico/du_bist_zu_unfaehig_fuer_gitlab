@@ -63,7 +63,7 @@ class Verification extends Component {
                 defaultChecked={this.state.checked} onChange={this.handleInputChange}>
               </input>
               <label htmlFor="checkbox">
-                Ich habe mich bei diesem Test bereit registriert
+              &nbsp;&nbsp;Ich habe mich bei diesem Test bereit registriert
               </label>
             </div>
           });

@@ -48,7 +48,7 @@ class serverAddress extends Component {
         this.setState({ wrongAttempt: true });
       }
       else {
-        if (sessionStorage.getItem("version") !== packageJson.version) {
+        if (JSON.parse(sessionStorage.getItem("config")).version !== packageJson.version) {
           this.setState({ connection: "wrongVersion" });
         }
         else {
