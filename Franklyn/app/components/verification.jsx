@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Overview from './overview';
 const { enroll } = require('../scripts/setup');
 import styles from './css/verification.css';
+import './css/checkbox.css';
 
 class Verification extends Component {
   state = {
@@ -55,13 +56,16 @@ class Verification extends Component {
         else {
           this.setState({
             checkBoxState:
-              <label className={styles.registeredLabel}>
+            <div>
+              <input 
+                type="checkbox" name="checkbox" 
+                id="checkbox"
+                defaultChecked={this.state.checked} onChange={this.handleInputChange}>
+              </input>
+              <label htmlFor="checkbox">
                 Ich habe mich bei diesem Test bereit registriert
-                  <input
-                  type="checkbox"
-                  onChange={this.handleInputChange}
-                  defaultChecked={this.state.checked} />
               </label>
+            </div>
           });
           this.render();
         }
@@ -143,7 +147,7 @@ class Verification extends Component {
                 />
               </div>
 
-              <div>
+              <div className={styles.registeredDiv}>
                 {this.state.checkBoxState}
               </div>
             </form>

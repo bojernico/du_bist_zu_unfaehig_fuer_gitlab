@@ -1,0 +1,46 @@
+input[type=checkbox] + label {
+    display: block !important;
+    margin: 0.2em !important;
+    cursor: pointer !important;
+    padding: 0.2em !important;
+  }
+  
+  input[type=checkbox] {
+    display: none !important;
+  }
+  
+  input[type=checkbox] + label:before {
+    content: "\2714" !important;
+    border: 0.1em solid #000 !important;
+    border-radius: 0.2em !important;
+    display: inline-block !important;
+    width: 25px !important;
+    height: 25px !important;
+    padding-left: 0.2em !important;
+    padding-bottom: 0.3em !important;
+    margin-right: 0.2em !important;
+    vertical-align: bottom !important;
+    color: transparent !important;
+    transition: .2s !important;
+  }
+  
+  input[type=checkbox] + label:active:before {
+    transform: scale(0) !important;
+  }
+  
+  input[type=checkbox]:checked + label:before {
+    background-color: #00a896 !important;
+    border-color: #00a896 !important;
+    color: #fff !important;
+  }
+  
+  input[type=checkbox]:disabled + label:before {
+    transform: scale(1) !important;
+    border-color: #aaa !important;
+  }
+  
+  input[type=checkbox]:checked:disabled + label:before {
+    transform: scale(1) !important;
+    background-color: #02c39a !important;
+    border-color: #02c39a !important;
+  }

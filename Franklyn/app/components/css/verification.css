@@ -3,11 +3,15 @@
   font-weight: normal;
   color: #00090C;
   font-size: 20px;
-  margin-top: 90px;
+  margin-top: 97px;
   margin-left: 305px;
   position: fixed;
 }
 
-.registeredLabel {
-  color: #00090C;
+.registeredDiv {
+  height: 20px;
+  text-align: center !important;
+  margin-top: 15px;
+  color: #00090C !important;
+  box-sizing: content-box !important;
 }
