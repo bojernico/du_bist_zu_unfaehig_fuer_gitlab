@@ -1,0 +1,13 @@
+{
+  "name": "franklyn",
+  "version": "1.0.0",
+  "description": "Franklyn is an exam support system.",
+  "main": "./main.prod.js",
+  "author": "Hannes Gerstmayr, Michael Helcig, Christian Strassmayr <a@b.com>",
+  "scripts": {
+    "electron-rebuild": "node -r babel-register ../internals/scripts/ElectronRebuild.js",
+    "postinstall": "yarn electron-rebuild"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {}
+}

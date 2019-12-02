@@ -1,0 +1,36 @@
+input {
+  text-align: center;
+}
+
+input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+.title {
+  text-align: center;
+  font-weight: normal;
+  color: #00090C;
+  font-size: 20px;
+  margin-top: 155px;
+  margin-left: 305px;
+  position: fixed;
+}
+
+.titleWrongVersion {
+  text-align: center;
+  font-weight: normal;
+  color: #00090C;
+  font-size: 20px;
+  margin-top: 140px;
+  margin-left: 305px;
+  position: fixed;
+}
+
+h4 {
+  color: #05668d !important;
+  align-self: center;
+  font-size: 15px !important;
+}
