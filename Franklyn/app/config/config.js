@@ -1,12 +1,15 @@
 //Configurations
 
-const port = 5005;
+const locally = false;
 
-const address = 'franklyn.htl-leonding.ac.at';
-const useHttps = true;
-/*
-const address = 'localhost'
-const useHttps = false
+const port = 5005;
+var address = 'franklyn.htl-leonding.ac.at';
+var useHttps = true;
+
+if (locally) {
+  address = 'localhost'
+  useHttps = false
+}
 
 /**
  * Returns the port
@@ -34,7 +37,7 @@ function getProtocol() {
  * Returns the full url
  */
 function getFullUrl() {
-  //return getFullUrlWithPort() //only locally
+  if (locally) return getFullUrlWithPort()
   return getProtocol() + '://' + getAddress()
 }
 
