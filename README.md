@@ -32,7 +32,7 @@ yarn package
 # Package with developer console
 yarn cross-env DEBUG_PROD=true yarn run package
 
-It is necessary to execute these commands on the OS for which you want to package the client.
+It is necessary to execute these commands on the OS \*for\* which you want to package the client.
 
 # The executable can now be found in the release directory
 cd ./release
