@@ -11,11 +11,17 @@ Franklyn Client is the client for the examinees (students).
 ```bash
 # Clone this repository
 git clone https://gitlab.com/franklyn-examsupport/franklyn-client.git
+
 # Go into the repository
 cd Franklyn
 
 # Install dependencies
 yarn
+
+# Decide whether you want to use the local server or the production server:
+Location: franklyn-client\Franklyn\app\config\config.js
+Variable: const locally = true/false;
+
 # Run the app in development mode
 yarn dev
 
