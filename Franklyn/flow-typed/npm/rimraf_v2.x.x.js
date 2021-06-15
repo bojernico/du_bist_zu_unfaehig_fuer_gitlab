@@ -1,4 +1,4 @@
-// flow-typed signature: a29e0dedc6e4eadde9b9d2a9c127d937
+// flow-typed signature: 0eb8a81288416e6790fe4ede6297aaf3
 // flow-typed version: c6154227d1/rimraf_v2.x.x/flow_>=v0.25.0 <=v0.103.x
 
 declare module 'rimraf' {

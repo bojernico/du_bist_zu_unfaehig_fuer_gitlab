@@ -1,4 +1,4 @@
-// flow-typed signature: 1adc7842e488239cbde2aac78a4a1a06
+// flow-typed signature: 151b047e3b9b96c9320aebfdc71f11e6
 // flow-typed version: c6154227d1/babel-register_v6.x.x/flow_>=v0.30.x <=v0.103.x
 
 declare module 'babel-register' {

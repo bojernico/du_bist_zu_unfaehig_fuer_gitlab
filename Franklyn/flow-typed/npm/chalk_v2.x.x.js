@@ -1,4 +1,4 @@
-// flow-typed signature: 4bd567a259dc11e23c66fd73a5c4352a
+// flow-typed signature: 44e706b2f04e8e65097119cbf57b9846
 // flow-typed version: c6154227d1/chalk_v2.x.x/flow_>=v0.25.x <=v0.103.x
 
 // From: https://github.com/chalk/chalk/blob/master/index.js.flow

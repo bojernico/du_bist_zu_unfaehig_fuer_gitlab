@@ -1,5 +1,5 @@
-// flow-typed signature: a3d2726a80e2b37b01dffa7a48c3c40f
-// flow-typed version: c6154227d1/jest_v23.x.x/flow_>=v0.39.x <=v0.103.x
+// flow-typed signature: 4fc774c093ffc8b6dbc15ea30d126ac5
+// flow-typed version: 7afca48d86/jest_v23.x.x/flow_>=v0.39.x <=v0.103.x
 
 type JestMockFn<TArguments: $ReadOnlyArray<*>, TReturn> = {
   (...args: TArguments): TReturn,
@@ -824,7 +824,7 @@ type JestObjectType = {
    * Returns the actual module instead of a mock, bypassing all checks on
    * whether the module should receive a mock implementation or not.
    */
-  requireActual(moduleName: string): any,
+  requireActual<T>(m: $Flow$ModuleRef<T> | string): T,
   /**
    * Returns a mock module instead of the actual module, bypassing all checks
    * on whether the module should be required normally or not.

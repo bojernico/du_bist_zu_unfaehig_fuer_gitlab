@@ -1,4 +1,4 @@
-// flow-typed signature: 590fb4d205f8f453617f509a7e87525d
+// flow-typed signature: e461b9fe923a5f62ed607392b0742c02
 // flow-typed version: c6154227d1/history_v4.x.x/flow_>=v0.25.x <=v0.103.x
 
 declare module "history/createBrowserHistory" {
