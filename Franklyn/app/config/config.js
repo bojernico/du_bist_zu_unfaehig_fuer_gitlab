@@ -3,7 +3,7 @@
 const locally = false;
 
 const port = 5005;
-var address = 'franklyn.htl-leonding.ac.at';
+var address = 'franklyn2.htl-leonding.ac.at';
 var useHttps = true;
 
 if (locally) {
