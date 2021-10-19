@@ -1,4 +1,4 @@
-# Franklyn-Client
+# Franklyn2-Client
 Franklyn is an exam support system.
 
 Franklyn Client is the client for the examinees (students).

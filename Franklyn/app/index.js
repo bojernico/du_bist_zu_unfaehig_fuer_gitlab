@@ -7,6 +7,8 @@ import './app.global.css';
 
 const store = configureStore();
 
+console.log('bitte zeig an')
+
 render(
   <AppContainer>
     <Root store={store} history={history} />

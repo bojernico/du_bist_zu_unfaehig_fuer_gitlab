@@ -66,6 +66,7 @@ app.on('ready', async () => {
       ? './images/icons/logo.png'
       : './images/icons/logo.ico';
 
+  console.log('ich bin im mainwindow')
   mainWindow = new BrowserWindow({
     title: 'Franklyn',
     backgroundColor: '#F7F7F7',
@@ -75,7 +76,11 @@ app.on('ready', async () => {
     height: 450,
     resizable: false,
     fullscreen: false,
-    icon: path.join(__dirname, seticons)
+    icon: path.join(__dirname, seticons),
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false
+    }
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);

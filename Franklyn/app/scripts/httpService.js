@@ -3,7 +3,7 @@ const axios = require('axios');
 const os = require('os');
 
 /**
- * Sends http get request 
+ * Sends http get request
  * @author cs
  * @param {String} url including port
  * @param {Array} params content only
@@ -21,9 +21,18 @@ function get(url, params, headers) {
       headers: headers
     };
     request(options, (error, response, body) => {
-      if (!error && response.statusCode == 200) resolve(body);
-      else if (error) reject(error);
+      if (!error && response.statusCode == 200) {
+        console.log('success')
+        console.log(response)
+        resolve(body);
+      }
+      else if (error) {
+        console.log('error')
+        console.log(error)
+        reject(error);
+      }
       else {
+        console.log('rejected wo error')
         reject({
           statusCode: response.statusCode,
           response: body
@@ -34,7 +43,7 @@ function get(url, params, headers) {
 }
 
 /**
- * Sends http post request 
+ * Sends http post request
  * @author cs
  * @param {String} url including port
  * @param {JSON} headers
@@ -78,7 +87,7 @@ function post(url, headers, data) {
 }
 
 /**
- * Sends http put request 
+ * Sends http put request
  * @author cs
  * @param {String} url including port
  * @param {Array} params content only
